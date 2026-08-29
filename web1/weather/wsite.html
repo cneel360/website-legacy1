@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.counter.dev/script.js" data-id="64be9641-fcf8-4a32-93c6-7bcf69da3166" data-utcoffset="-4"></script>
+  <title> quick Weather plus </title>
+  <style>
+    /* Add some basic CSS styling */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-image: url("../weather/img.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+  </style>
+</head>
+<body>
+  <h1> quick Weather plus </h1>
+
+  <input type="text" id="locationInput" placeholder="Enter location">
+  <button onclick="getWeather()">Get Weather</button>
+
+  <div id="weatherData"></div>
+
+  <script>
+    function getWeather() {
+      var locationInput = document.getElementById("locationInput");
+      var location = locationInput.value;
+
+      // Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key
+      var apiKey = 'f23a837ed09162dfedca128af535bf79';
+      var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + location + '&appid=' + apiKey;
+
+      // Make an API request
+      fetch(apiUrl)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          displayWeather(data);
+        })
+        .catch(function(error) {
+          console.log('Error:', error);
+        });
+    }
+
+    function displayWeather(data) {
+      var weatherData = document.getElementById("weatherData");
+
+      // Clear previous weather data
+      weatherData.innerHTML = '';
+
+      if (data.cod !== '404') {
+        var cityName = data.name;
+        var temperature = data.main.temp;
+        var weatherDescription = data.weather[0].description;
+
+        var weatherInfo = document.createElement('p');
+        weatherInfo.textContent = 'City: ' + cityName + ', Temperature: ' + temperature + '°F, Weather: ' + weatherDescription;
+
+        weatherData.appendChild(weatherInfo);
+      } else {
+        var errorMessage = document.createElement('p');
+        errorMessage.textContent = 'Weather data not found for the given location.';
+        
+        weatherData.appendChild(errorMessage);
+      }
+    }
+  </script>
+  <p>
+      product of  case neel company 
+
+  </p>
+</body>
+</html>
